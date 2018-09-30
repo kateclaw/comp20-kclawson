@@ -1,0 +1,55 @@
+.software {
+    background-image: url(software.png);
+    height: 1204px;
+    width: 1211px;
+}
+
+/* if screen is greater than 1200px
+    airplane safety */
+@media only screen and (min-width: 1201px) {
+    .software {
+        width: 445px;
+        height: 580px;
+        background-position: 0px 1204px;
+    }
+}
+
+/* if screen is greater than 1000px but less than or equal to 1200px
+    elevator safety */
+@media (min-width: 1001px) and (max-width: 1200px) {
+    .software {
+        width: 430px;
+        height: 580px;
+        background-position: -440px 1204px;
+    }
+}
+
+/* if screen is greater than 800px but less than or equal to 1000px
+    computerized voting */
+@media (min-width: 800px) and (max-width: 1000px) {
+    .software {
+        width: 335px;
+        height: 580px;
+        background-position: -870px 1204px;
+    }
+}
+
+/* if screen is greater than 600px but less than or equal to 800px
+    wait really */
+@media (min-width: 601px) and (max-width: 800px) {
+    .software {
+        width: 720px;
+        height: 620px;
+        background-position: 0px 620px;
+    }
+}
+
+/* if screen is less than or equal to 600px
+    blockchain */
+@media (max-width: 600px) {
+    .software {
+        width: 485px;
+        height: 620px;
+        background-position: -720px 620px;
+    }
+}
