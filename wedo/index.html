@@ -30,7 +30,7 @@
         console.log('video:', video);
 
         video.addEventListener('timeupdate', function () {
-            console.log('in event listener');
+            console.log('in time event listener');
 
             var time = video.currentTime;
             console.log('time:', time);
@@ -87,24 +87,13 @@
                 lyrics.innerHTML = lyricsRay[1];
                 // lyrics.innerHTML = "We do!";
             }
-            if (time == 45) {
-                lyrics.innerHTML = "";
-            }
-
-
-
-
-            // lyrics.div = "test!";
-            // lyrics.style.visibility = show ? 'visible' : 'hidden';
-
-            // make array of lyrics, then choose different indeces of the 
-            // array depending on what time it is in the video
-
-            // everytime there's a time update, check to see if it's within
-            // specified time frame. if it is, then show respecitve lyrics (once,
-            // until time changes to one not in time frame.
-
         }, false);
+
+        video.addEventListener('ended', function () {
+            console.log('in ended event listener');
+
+            lyrics.innerHTML = "";
+        })
     </script>
 </body>
 
