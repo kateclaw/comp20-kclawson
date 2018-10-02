@@ -1,4 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+@import url('https://fonts.googleapis.com/css?family=Rock+Salt');
+
+
+* {
+    font-family: 'Gloria Hallelujah', cursive;
+    text-align: center;
+}
+
+#title {
+    font-size: 75px;
+    margin: none;
+    /* -webkit-text-stroke: .25px black; */
+    color: yellow;
+    text-shadow: -3px 3px 0px black,
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+#wedo {
+    padding: 20px;
+}
+
 #lyrics {
-    background-color: red;
-    right: 0;
+    font-size: 25px;
+
 }

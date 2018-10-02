@@ -17,23 +17,83 @@
     <script>
         // Complete this section and create a CSS file named style.css
         var lyrics = document.getElementById('lyrics');
-        console.log('lyrics: ' + lyrics)
-
+        var lyricsRay = ["We do, we do!", "We do!", "Who controls the British crown?",
+            "Who keeps the metric system down?",
+            "Who keeps Atlantis off the maps?", "Who keeps the Martians under wraps?",
+            "Who holds back the electric car?", "Who makes Steve Guttenberg a star?",
+            "Who robs cavefish of their site?", "Who rigs every Oscar night?"
+        ]
         var video = document.getElementById('wedo');
 
-        console.log('video: ' + video);
+        console.log('lyrics:', lyrics);
+        console.log('lyrics array:', lyricsRay);
+        console.log('video:', video);
 
         video.addEventListener('timeupdate', function () {
-            console.log("in event listener");
+            console.log('in event listener');
 
-            var show = video.currentTime;
-            console.log(show);
-            if (show >= 2 && show < 3) {
-                lyrics.innerHTML = "TEST INNER HTML 1";
+            var time = video.currentTime;
+            console.log('time:', time);
+
+            if (time >= 4 && time < 6) {
+                lyrics.innerHTML = lyricsRay[2];
+                // lyrics.innerHTML = "Who controls the British crown?";
             }
-            if (show >= 3 && show < 4) {
-                lyrics.innerHTML = "TEST INNER HTML 2";
+            if (time >= 6 && time < 8) {
+                lyrics.innerHTML = lyricsRay[3];
+                // lyrics.innerHTML = "Who keeps the metric system down?";
             }
+            if (time >= 8 && time < 12.5) {
+                lyrics.innerHTML = lyricsRay[0];
+                // lyrics.innerHTML = "We do, we do!";
+            }
+            if (time >= 12.5 && time < 14.5) {
+                lyrics.innerHTML = lyricsRay[4];
+                // lyrics.innerHTML = "Who keeps Atlantis off the maps?";
+            }
+            if (time >= 14.5 && time < 16.5) {
+                lyrics.innerHTML = lyricsRay[5];
+                // lyrics.innerHTML = "Who keeps the Martians under wraps?";
+            }
+            if (time >= 16.5 && time < 20.5) {
+                lyrics.innerHTML = lyricsRay[0];
+                // lyrics.innerHTML = "We do, we do!";
+            }
+            if (time >= 20.5 && time < 25) {
+                lyrics.innerHTML = lyricsRay[6];
+                // lyrics.innerHTML = "Who holds back the electric car?";
+            }
+            if (time >= 25 && time < 29.5) {
+                lyrics.innerHTML = lyricsRay[7];
+                // lyrics.innerHTML = "Who makes Steve Guttenberg a star?";
+            }
+            if (time >= 29.5 && time < 33.5) {
+                lyrics.innerHTML = lyricsRay[0];
+                // lyrics.innerHTML = "We do, we do!";
+            }
+            if (time >= 33.5 && time < 35.5) {
+                lyrics.innerHTML = lyricsRay[8];
+                // lyrics.innerHTML = "Who robs cavefish of their site?";
+            }
+            if (time >= 35.5 && time < 38) {
+                lyrics.innerHTML = lyricsRay[9];
+                // lyrics.innerHTML = "Who rigs every Oscar night?";
+            }
+            if (time >= 38 && time < 40) {
+                lyrics.innerHTML = lyricsRay[1];
+                // lyrics.innerHTML = "We do!";
+            }
+            if (time >= 40) {
+                lyrics.innerHTML = lyricsRay[1];
+                // lyrics.innerHTML = "We do!";
+            }
+            if (time == 45) {
+                lyrics.innerHTML = "";
+            }
+
+
+
+
             // lyrics.div = "test!";
             // lyrics.style.visibility = show ? 'visible' : 'hidden';
 
