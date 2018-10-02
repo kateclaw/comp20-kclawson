@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>We Do</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+    <h1 id="title">We Do</h1>
+
+    <video src="https://www.cs.tufts.edu/comp/20/wedo.mp4" id="wedo" controls></video>
+    <div id="lyrics"></div>
+
+    <script>
+        // Complete this section and create a CSS file named style.css
+        var lyrics = document.getElementById('lyrics');
+        console.log('lyrics: ' + lyrics)
+
+        var video = document.getElementById('wedo');
+
+        console.log('video: ' + video);
+
+        video.addEventListener('timeupdate', function () {
+            console.log("in event listener");
+
+            var show = video.currentTime;
+            console.log(show);
+            if (show >= 2 && show < 3) {
+                lyrics.innerHTML = "TEST INNER HTML 1";
+            }
+            if (show >= 3 && show < 4) {
+                lyrics.innerHTML = "TEST INNER HTML 2";
+            }
+            // lyrics.div = "test!";
+            // lyrics.style.visibility = show ? 'visible' : 'hidden';
+
+            // make array of lyrics, then choose different indeces of the 
+            // array depending on what time it is in the video
+
+            // everytime there's a time update, check to see if it's within
+            // specified time frame. if it is, then show respecitve lyrics (once,
+            // until time changes to one not in time frame.
+
+        }, false);
+    </script>
+</body>
+
+</html>
