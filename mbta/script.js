@@ -1,11 +1,34 @@
-// navigator.geolocation.getCurrentPosition(function position) {
-//     something(position.coords.latitude, position.coords.longitude);
+// var currLat = -9999;
+// var currLng = -9999;
+
+// function getLocation() {
+//   console.log("in curr location function");
+
+//   navigator.geolocation.getCurrentPosition(function(position) {
+//     console.log("in geolocation navigator shindig");
+//     currLat = position.coords.latitude;
+//     currLng = position.coords.longitude;
+//     // printLocation();
+//   });
+
+//   console.log("done w get location");
 // }
+
+// function printLocation() {
+//   console.log("in print funcitono");
+//   elem = document.getElementById("map");
+//   elem.innerHTML = '<p class="fun">' + currLat + ", " + currLng + "</p>";
+// }
+
+// window.onload = function() {
+//   getLocation();
+// };
 
 function initMap() {
   var marker_img = "train_icon.png";
+  var curr_marker_img = "user_location.png";
+
   var SouthStation = { lat: 42.352271, lng: -71.05524200000001 };
-  //   var Andrew = { lat: 42.330154, lng: -71.057655 };
 
   var stations = [
     ["Alewife", 42.395428, -71.142483],
@@ -30,14 +53,56 @@ function initMap() {
     ["Quincy Center", 42.251809, -71.005409],
     ["Quincy Adams", 42.233391, -71.007153],
     ["Braintree", 42.2078543, -71.0011385]
-  ]; //LEFT BRANCH //RIGHT BRANCH
+  ];
 
   var map = new google.maps.Map(document.getElementById("map"), {
     center: SouthStation,
-    zoom: 12
+    zoom: 13
   });
 
-  //south station
+  infoWindow = new google.maps.InfoWindow();
+  currMarker = new google.maps.Marker({
+    map: map,
+
+    icon: curr_marker_img
+  });
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        currMarker.setPosition(pos);
+        infoWindow.setPosition(pos);
+        // infoWindow.setContent("Location found!");
+        infoWindow.open(map);
+        map.setCenter(pos);
+      },
+      function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    // Browser doesn't support Geolocation
+    // handleLocationError(false, infoWindow, map.getCenter());
+    console.log("idk ur location sorry ur stuck at south station");
+  }
+
+  // if (!getLocation()) {
+  //   var map = new google.maps.Map(document.getElementById("map"), {
+  //     center: SouthStation,
+  //     zoom: 13
+  //   });
+  // } else {
+  //   var map = new google.maps.Map(document.getElementById("map"), {
+  //     center: { currLat, currLng },
+  //     zoom: 16
+  //   });
+  // }
+
   var infoWindow = new google.maps.InfoWindow({
     content: "Closest MBTA Red Line Subway station:"
   });
@@ -45,6 +110,7 @@ function initMap() {
   var marker, i, line, j;
 
   for (i = 0; i < stations.length; i++) {
+    // create markers
     marker = new google.maps.Marker({
       position: new google.maps.LatLng(stations[i][1], stations[i][2]),
       map: map,
@@ -52,6 +118,7 @@ function initMap() {
       icon: marker_img
     });
 
+    // create info windows
     google.maps.event.addListener(
       marker,
       "click",
@@ -63,6 +130,7 @@ function initMap() {
       })(marker, i)
     );
 
+    // coordinates for lines
     // MAKE THIS MORE EFFICIENT!!!!!!!
     var lineCoordinates = [
       { lat: stations[0][1], lng: stations[0][2] }, //ALEWIFE
@@ -103,6 +171,7 @@ function initMap() {
       { lat: stations[21][1], lng: stations[21][2] }
     ];
 
+    // main line
     line = new google.maps.Polyline({
       path: lineCoordinates,
       geodesic: true,
@@ -111,6 +180,7 @@ function initMap() {
       strokeWeight: 3
     });
 
+    // left branch
     leftLine = new google.maps.Polyline({
       path: leftLineCoords,
       geodesic: true,
@@ -119,6 +189,7 @@ function initMap() {
       strokeWeight: 3
     });
 
+    // right branch
     rightLine = new google.maps.Polyline({
       path: rightLineCoords,
       geodesic: true,
@@ -127,6 +198,8 @@ function initMap() {
       strokeWeight: 3
     });
   }
+
+  // "print" line segments
   line.setMap(map);
   leftLine.setMap(map);
   rightLine.setMap(map);
