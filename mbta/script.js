@@ -31,6 +31,8 @@ function initMap() {
     lat: 42.352271,
     lng: -71.05524200000001
   };
+
+  // center map at south station
   var map = new google.maps.Map(document.getElementById("map"), {
     center: SouthStation,
     zoom: 13
@@ -45,12 +47,8 @@ function initMap() {
   // find location and recenter map
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
-      // var pos = {
-      //   lat: position.coords.latitude,
-      //   lng: position.coords.longitude
-      // };
 
-      var pos = position.coords;
+      // var pos = position.coords;
       var lat = pos.latitude;
       var lng = pos.longitude;
 
@@ -74,8 +72,7 @@ function initMap() {
       });
     });
   } else {
-    // Browser doesn't support Geolocation
-    // handleLocationError(false, infoWindow, map.getCenter());
+    // if browser doesn't support geolocation
     alert("idk ur location sorry ur stuck at south station");
   }
 
@@ -100,18 +97,17 @@ function initMap() {
     google.maps.event.addListener(currMarker, "click", findClosest);
 
     var urlMBTA = "https://chicken-of-the-sea.herokuapp.com/redline/schedule.json?stop_id=" + stations[i][3];
-    console.log(urlMBTA);
 
     requestMBTA(urlMBTA, i, marker, function (data, stationIndex, stationMarker) {
       var response = JSON.parse(data.responseText);
       var stationInfo = response.data;
       var stationName = stations[stationIndex][0];
-      var returnHTML = "<strong>" + stationName + "</strong> <br> Arrival: <br>";
+      var returnHTML = "<strong>" + stationName + "</strong> <br> Upcoming train arrival times: <br>";
       var leng = stationInfo.length;
 
       // get station attributes
       for (var j = 0; j < leng; j++) {
-        returnHTML += stationInfo[j].attributes.arrival_time + "<br"
+        returnHTML += stationInfo[j].attributes.arrival_time + "<br>"
         // + "Direction: " +
         // stationInfo[j].attributes.direction_id;
       }
@@ -263,18 +259,7 @@ function initMap() {
   leftLine.setMap(map);
   rightLine.setMap(map);
 
-  // //// edit this prob
-  // currMarker.addListener(
-  //   "click",
-  //   function () {
-  //     currInfoWindow.open(map, currMarker);
-  //   },
-  //   findClosest
-  // );
-  // /////
-
-  // google.maps.event.addListener(map, "click", findClosest)
-
+  // find closest station
   function findClosest(event) {
     var distances = [];
     var closest = -1;
@@ -326,7 +311,7 @@ function initMap() {
 
   }
 
-  ///////// XML HTTP REQUEST!!!
+  //XML HTTP REQUEST
   function requestMBTA(url, index, marker, callback) {
     var request = new XMLHttpRequest;
 
@@ -335,7 +320,6 @@ function initMap() {
 
     request.onreadystatechange = function () {
       if (request.readyState == 4 && request.status == 200) {
-        // request.onreadystatechange = doNothing;
         callback(request, index, marker);
       }
     };
@@ -343,7 +327,4 @@ function initMap() {
     request.send();
   }
 
-  function doNothing() {}
-
-  window.requestMBTA = requestMBTA;
 }
