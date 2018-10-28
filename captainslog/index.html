@@ -8,7 +8,55 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        // Your work will be done here...
+        $(document).ready(function () {
+            loadData;
+
+            function loadData() {
+                $('#log').html(localStorage.message);
+            }
+
+            $(window).keypress(function (e) {
+            // if enter
+                if (e.which == 13) {
+
+                     $('#msg').each(function () {
+                         var message = $('#msg').val();
+                         localStorage.message = message;
+                         $('#log').html(localStorage.message);
+                    
+                    })
+                }
+            
+        })
+
+        });
+
+
+
+        // $(document).ready(function () {
+        //         $(window).unload(saveSettings);
+        //         loadSettings();
+        //     });
+
+        //     function loadSettings() {
+        //         $('#msg').val(localStorage.message);
+        //     }
+
+        //     function saveSettings() {
+        //         localStorage.message = $('#msg').val();
+
+        //     }
+
+        // // $('#msg').val(localStorage.msg);
+        // // var msg = document.getElementById("msg").value;
+        // // localStorage.msg = msg;
+
+        // $(document).keypress(function (e) {
+        //         // if enter
+        //         if (e.which == 13) {
+        //             $('#log').html(message)
+        //         }
+        //     })
     </script>
 </head>
 
