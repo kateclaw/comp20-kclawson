@@ -15,19 +15,72 @@
                 $('#log').html(localStorage.message);
             }
 
+            var messages = [];
+            var i = 0;
+
             $(window).keypress(function (e) {
-            // if enter
+                // if enter
                 if (e.which == 13) {
 
-                     $('#msg').each(function () {
-                         var message = $('#msg').val();
-                         localStorage.message = message;
-                         $('#log').html(localStorage.message);
-                    
+                // THIS WORKS
+                    // $('#msg').each(function () {
+                    //     var message = $('#msg').val();
+                    //     localStorage.message = message;
+                    //     messages.push(localStorage.message);
+
+                    //     console.log("local storage:" + localStorage.message);
+                    //     console.log(" messages array:" + messages[i]);
+                    // })
+                /////
+
+
+                    // // // for (i = 0; i < messages.length; i++) {
+                    // // //    $('#log').html(messages[i]);
+                    // // //     console.log("after: " + messages[i]);
+                    // // // }
+                
+
+                    $('#msg').each(function () {
+                        var message = $('#msg').val();
+                        // localStorage.message = message;
+                        messages.push(message);
+                        messages.push("<br>");
+
+
+                        localStorage.setItem("messages", JSON.stringify(messages));                        
                     })
+
+                    var storedMessages = JSON.parse(localStorage.getItem("messages"));
+
+                    storedMessages.reverse();
+
+                    console.log(storedMessages);
+                    $('#log').html(storedMessages);
+                    
+                // THIS WORKS
+                    // messages.forEach(function (k) {
+                    //     $('#log').html(k)
+                    //     console.log(k);
+                    // })
+                /////
+
+                    // var map = {};
+                    // $("#msg").each(function () {
+                    //     map[$(this).val()] = $(this).val();
+                    // });
+
+                    // alert(map); 
+
+                    // var inputValues = $('#msg').map(function () {
+                    //     return $(this).val();
+                    // });
+
+                    // $('#log').append(inputValues)
+
                 }
-            
-        })
+
+            })
+      
 
         });
 
