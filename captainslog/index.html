@@ -9,14 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            loadData;
-
-            function loadData() {
-                $('#log').html(localStorage.message);
-            }
-
             var messages = [];
-            // var i = 0;
 
             $(window).keypress(function (e) {
                 // if enter key pressed
@@ -39,6 +32,10 @@
 
                     // bind array of stored messages to "log" div
                     $('#log').html(storedMessages);
+
+                    // reset input box
+                    $('#msg').val('');
+
                 }
             })
             // retrieve stored messages from previous
