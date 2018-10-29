@@ -9,17 +9,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            loadData;
+            // loadData;
 
-            function loadData() {
-                $('#log').html(localStorage.message);
-            }
+            // function loadData() {
+            //     $('#log').html(localStorage.message);
+            // }
 
             var messages = [];
-            var i = 0;
+            // var i = 0;
 
             $(window).keypress(function (e) {
-                // if enter
+                // if enter key pressed
                 if (e.which == 13) {
 
                 // THIS WORKS
@@ -32,29 +32,25 @@
                     //     console.log(" messages array:" + messages[i]);
                     // })
                 /////
-
-
-                    // // // for (i = 0; i < messages.length; i++) {
-                    // // //    $('#log').html(messages[i]);
-                    // // //     console.log("after: " + messages[i]);
-                    // // // }
                 
 
                     $('#msg').each(function () {
                         var message = $('#msg').val();
-                        // localStorage.message = message;
+                        // add message to array
                         messages.push(message);
                         messages.push("<br>");
 
-
+                        // local store messages array (as strings)
                         localStorage.setItem("messages", JSON.stringify(messages));                        
                     })
 
+                    // get stored messages (as array)
                     var storedMessages = JSON.parse(localStorage.getItem("messages"));
+                    // reverse the array to print newest message first
                     storedMessages.reverse();
 
-
-                    console.log(storedMessages);
+                    // console.log(storedMessages);
+                    // bind array of stored messages to "log" div
                     $('#log').html(storedMessages);
                     
                 // THIS WORKS
@@ -63,53 +59,9 @@
                     //     console.log(k);
                     // })
                 /////
-
-                    // var map = {};
-                    // $("#msg").each(function () {
-                    //     map[$(this).val()] = $(this).val();
-                    // });
-
-                    // alert(map); 
-
-                    // var inputValues = $('#msg').map(function () {
-                    //     return $(this).val();
-                    // });
-
-                    // $('#log').append(inputValues)
-
                 }
-
             })
-      
-
         });
-
-
-
-        // $(document).ready(function () {
-        //         $(window).unload(saveSettings);
-        //         loadSettings();
-        //     });
-
-        //     function loadSettings() {
-        //         $('#msg').val(localStorage.message);
-        //     }
-
-        //     function saveSettings() {
-        //         localStorage.message = $('#msg').val();
-
-        //     }
-
-        // // $('#msg').val(localStorage.msg);
-        // // var msg = document.getElementById("msg").value;
-        // // localStorage.msg = msg;
-
-        // $(document).keypress(function (e) {
-        //         // if enter
-        //         if (e.which == 13) {
-        //             $('#log').html(message)
-        //         }
-        //     })
     </script>
 </head>
 
