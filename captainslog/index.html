@@ -9,11 +9,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            // loadData;
+            loadData;
 
-            // function loadData() {
-            //     $('#log').html(localStorage.message);
-            // }
+            function loadData() {
+                $('#log').html(localStorage.message);
+            }
 
             var messages = [];
             // var i = 0;
@@ -21,19 +21,6 @@
             $(window).keypress(function (e) {
                 // if enter key pressed
                 if (e.which == 13) {
-
-                // THIS WORKS
-                    // $('#msg').each(function () {
-                    //     var message = $('#msg').val();
-                    //     localStorage.message = message;
-                    //     messages.push(localStorage.message);
-
-                    //     console.log("local storage:" + localStorage.message);
-                    //     console.log(" messages array:" + messages[i]);
-                    // })
-                /////
-                
-
                     $('#msg').each(function () {
                         var message = $('#msg').val();
                         // add message to array
@@ -41,26 +28,23 @@
                         messages.push("<br>");
 
                         // local store messages array (as strings)
-                        localStorage.setItem("messages", JSON.stringify(messages));                        
+                        localStorage.setItem("messages", JSON.stringify(messages));         
                     })
 
                     // get stored messages (as array)
                     var storedMessages = JSON.parse(localStorage.getItem("messages"));
+
                     // reverse the array to print newest message first
                     storedMessages.reverse();
 
-                    // console.log(storedMessages);
                     // bind array of stored messages to "log" div
                     $('#log').html(storedMessages);
-                    
-                // THIS WORKS
-                    // messages.forEach(function (k) {
-                    //     $('#log').html(k)
-                    //     console.log(k);
-                    // })
-                /////
                 }
             })
+            // retrieve stored messages from previous
+            var storedMessages2 = JSON.parse(localStorage.getItem("messages"));
+            storedMessages2.reverse();
+            $('#log').html(storedMessages2);
         });
     </script>
 </head>
