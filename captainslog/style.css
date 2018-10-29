@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Pirata+One');
+@import url('https://fonts.googleapis.com/css?family=IM+Fell+Double+Pica');
+
+body {
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Pirata One', cursive;
+}
+
+#log {
+    font-family: 'IM Fell Double Pica', serif;
+
+}
