@@ -9,34 +9,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            var messages = [];
+            var data = [];
 
             $(window).keypress(function (e) {
                 // if enter key pressed
                 if (e.which == 13) {
                     $('#msg').each(function () {
+                        // retrieve date and message
                         var date = Date();
-                        
                         var message = $('#msg').val();
-                        // add message to array
-                        messages.push(message);
-                        messages.push(" - ")
-                        messages.push(date);
 
-                        messages.push("<br>");
+                        // add message and date to array
+                        data.push(message);
+                        data.push(" - ")
+                        data.push(date);
+                        data.push("<br>");
 
-                        // local store messages array (as strings)
-                        localStorage.setItem("messages", JSON.stringify(messages));         
+                        // local store data array (as strings)
+                        localStorage.setItem("messages", JSON.stringify(data));         
                     })
 
-                    // get stored messages (as array)
-                    var storedMessages = JSON.parse(localStorage.getItem("messages"));
+                    // get stored data (as array)
+                    var storedData = JSON.parse(localStorage.getItem("messages"));
 
                     // reverse the array to print newest message first
-                    storedMessages.reverse();
+                    storedData.reverse();
 
                     // bind array of stored messages to "log" div
-                    $('#log').html(storedMessages);
+                    $('#log').html(storedData);
 
                     // reset input box
                     $('#msg').val('');
@@ -44,9 +44,9 @@
                 }
             })
             // retrieve stored messages from previous
-            var storedMessages2 = JSON.parse(localStorage.getItem("messages"));
-            storedMessages2.reverse();
-            $('#log').html(storedMessages2);
+            var storedData2 = JSON.parse(localStorage.getItem("messages"));
+            storedData2.reverse();
+            $('#log').html(storedData2);
         });
     </script>
 </head>
