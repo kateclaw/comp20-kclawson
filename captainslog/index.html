@@ -15,9 +15,14 @@
                 // if enter key pressed
                 if (e.which == 13) {
                     $('#msg').each(function () {
+                        var date = Date();
+                        
                         var message = $('#msg').val();
                         // add message to array
                         messages.push(message);
+                        messages.push(" - ")
+                        messages.push(date);
+
                         messages.push("<br>");
 
                         // local store messages array (as strings)
