@@ -74,7 +74,7 @@
     <p>
       When the author of this code declared their "MongoUri" variable to store
       their connection to their MongoDB database, they included their database
-      address provided by mLab, as shown in the image below.
+      address provided by mLab, as shown in the image below (in server.js).
     </p>
     <img src="mongo.png" alt="MongoDB URI" />
     <p>
@@ -86,19 +86,25 @@
       was of high privacy.
     </p>
 
-    <h4>Issue 3: CORS</h4>
+    <h4>Issue 3: CORS Universally Accessible</h4>
     <p>
-      While it was required that each 2048 Game Center allow CORS, this can lead
-      to some vulnerabilities. The author of this code allowed any domain to
-      access the site (in server.js, in the get "/" route, pictured below).
+      While it was required that each 2048 Game Center allow CORS, careless
+      usage can lead to security vulnerabilities. The author of this code
+      allowed sharing with any origin, as denoted by the "*" (in server.js, in
+      the get "/" route, pictured below).
     </p>
     <img src="CORS.png" alt="screenshot of CORS specifications" />
     <p>
-      In order to decrease vulnerabilities, it is suggested that the programmer
-      associate a list of domains that are allowed access. While this is not of
-      utmost importance for this project, if the app stored more private,
-      important information, it would be essential that the author limit who has
-      access to the site, while also keeping it accessible to those who need it.
+      This means that any site can make a request to the author's app on behalf
+      of their visitors and process its response. In general, if the developer
+      has an implementaion like authentication or authorization that is based on
+      what is automatically provided by the browser (like cookies), the requests
+      triggered by the third party sites will use them too. In order to decrease
+      this risk, it is suggested that the developer associate a list of domains
+      that are allowed access to the app. While this is not of utmost importance
+      for this project, if the app stored more private, important information,
+      it would be essential that the author limit who has access to the site,
+      while also keeping it accessible to those who need it.
     </p>
     <h4>Issue 4: DDoS Protection</h4>
     <p>
@@ -148,5 +154,6 @@
       href="https://help.heroku.com/HCCDCDYY/how-does-heroku-handle-security-vulnerabilities-that-affect-the-platform"
       >Heroku DDoS Securities</a
     >
+    <p>Piazza discussion and in-class lecture</p>
   </body>
 </html>
