@@ -23,21 +23,24 @@
     </p>
     <h3>Methodology</h3>
     <p>
-      I first tried the tactics outlined by Ming in class, before looking at the
-      source code. So, I first played with XSS and tried to insert a username
-      that was really just javascript using curl. However, this just put
+      I first tried the tactics outlined by Ming in class using a black box
+      approach. So, I first played with XSS and tried to insert a username that
+      was really just javascript using curl. However, this just put
       "scriptalertscript" as a username into the database, meaning they
       accounted for XSS attacks. (when I later looked at the source code, I
       confirmed this was true). I then tried an injection attack by querying a
       username that I knew was not stored in the database using the [$ne]
       operator. However, this gave me an "internal server error". Curious, I
       tried just going to the /scores.json route without any query strings, and
-      found a server error here, as well. Because my partner's app wasn't fully
-      functional, I ended up doing a lot of research on web app security, and
-      tried to find attack tactics and security measures that may apply to the
-      2048 Game Center and my partner's code. I read about CORS, (D)DoS attacks,
-      and the built in security of Heroku apps. The following 3 issues are what
-      I could conclude from what we learned in class and the research I did.
+      found a server error here, as well. After trying these two tactics, I
+      scanned the source code for any clear security vulernabilities, and found
+      a vulnerability in the MongoDB URI. However, because my partner's app
+      wasn't fully functional, I ended up doing a lot of research on web app
+      security, and tried to find attack tactics and security measures that may
+      apply to the 2048 Game Center and my partner's code. I read about CORS,
+      (D)DoS attacks, and the built in security of Heroku apps. The following 3
+      issues are what I could conclude from what we learned in class and the
+      research I did.
     </p>
     <h3>Abstract of Findings</h3>
     <p>
@@ -67,8 +70,23 @@
       presume that if the code functioned properly, I would have succesfully
       retrieved this data and found a high security vulnerability.
     </p>
+    <h4>Issue 2: MongoDB URI Hardcoded</h4>
+    <p>
+      When the author of this code declared their "MongoUri" variable to store
+      their connection to their MongoDB database, they included their database
+      address provided by mLab, as shown in the image below.
+    </p>
+    <img src="mongo.png" alt="MongoDB URI" />
+    <p>
+      This address requires that the developer include their username and
+      password. So, by including the database in this manner, the developer
+      effectively shared their username and password to the database to whoever
+      has access to the source code of the application. This would be a high
+      security vulnerability, particularly if the information in the database
+      was of high privacy.
+    </p>
 
-    <h4>Issue 2: CORS</h4>
+    <h4>Issue 3: CORS</h4>
     <p>
       While it was required that each 2048 Game Center allow CORS, this can lead
       to some vulnerabilities. The author of this code allowed any domain to
@@ -82,7 +100,7 @@
       important information, it would be essential that the author limit who has
       access to the site, while also keeping it accessible to those who need it.
     </p>
-    <h4>Issue 3: DDoS Protection</h4>
+    <h4>Issue 4: DDoS Protection</h4>
     <p>
       While DDoS isn't something that was of great concern for this project and
       might not be for a 2048 Game Center generally, this is a security issue
@@ -101,9 +119,10 @@
       in this code, particularly the ones demonstrated in class, like XSS and
       Injection attacks, due to limited app functionality, I was able to find
       some general security precautions that developers should take when
-      creating a web app. Primarly, it is essential that developers do not trust
-      user input! If a user is able to input whatever information they desire
-      into a web application, they can easily retrieve and exploit private and
+      creating a web app, as well as a vulnerability in the MongoDB URI
+      declaration. Primarly, it is essential that developers do not trust user
+      input! If a user is able to input whatever information they desire into a
+      web application, they can easily retrieve and exploit private and
       potentially sensitive information. In web apps that require more security
       precautions, for example and app that has an authentication element to it,
       like storing usernames and passwords, it is important that more serious
