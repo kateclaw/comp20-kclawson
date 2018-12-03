@@ -1,11 +1,11 @@
 Correctly Implemented:
 
--
+- All aspects as specified.
 
 Collaborators:
 
--
+- None.
 
-Approximate hours spent:
+Approximate time spent:
 
--
+- 2 hrs.
